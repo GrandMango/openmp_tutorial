@@ -1,10 +1,12 @@
 CXX= g++
-CXXFLAGS= -std=c++14 -O2 -fopenmp 
-SRC=$(wildcard *.cc)
-EXF=$(SRC:%.cc=%)
-CUR_DIR= $(shell pwd)
-OUT_DIR= $(CUR_DIR)/build
-OBJ_DIR = $(OUT_DIR)/obj
+CXXFLAGS= -std=c++14 -O2 -fopenmp
+CUR_DIR=$(shell pwd)
+SRC_DIR=$(CUR_DIR)/src 
+OUT_DIR=$(CUR_DIR)/build
+SRC=$(wildcard src/*.cc)
+SRC_NODIR=$(notdir $(SRC))
+EXF=$(SRC_NODIR:%.cc=%)
+
 all: create_dir $(EXF)
 
 define CRT_DIR
@@ -18,24 +20,20 @@ define CRT_DIR
 endef
 
 print:
+	@echo SRC_DIR: $(SRC_DIR)
+	@echo SRC: $(SRC)
 	@echo EXF: $(EXF)
 
 create_dir:  
 	@$(call CRT_DIR,$(OUT_DIR))
 
-$(EXF):%:%.cc
+$(EXF):%:src/%.cc
 	$(CXX) $(CXXFLAGS) -o $(OUT_DIR)/$@ $<
 	
 #vector_sum_1: vector_sum_1.cc
 #	$(CXX) vector_sum_1.cc $(CXXFLAGS) -o vector_sum_1
 
-#vector_sum_2: vector_sum_2.cc
-#	$(CXX) vector_sum_2.cc $(CXXFLAGS) -o vector_sum_2
-
-#vector_sum_scoped: vector_sum_scoped.cc
-#	$(CXX) vector_sum_scoped.cc $(CXXFLAGS) -o vector_sum_scoped
 
 clean:
-	rm -f $(EXF)
 	rm -rf $(OUT_DIR)
 
