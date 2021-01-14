@@ -4,7 +4,7 @@
 ## Build from source
 
 Build Enviorment:
-- Make 3.81 
+- Make 3.8.1 
 - gcc  10.2.0
 
 Checkout to project root and run following commands:
