@@ -1,12 +1,11 @@
-# openmp_tutorial
+# OpenMP Tutorial
 
 
 ## Build from source
 
-Requires:
-
-- Make 3.81 above
-- gcc  4.9.0 above
+Build Enviorment:
+- Make 3.8.1 
+- gcc  10.2.0
 
 Checkout to project root and run following commands:
 ```shell
@@ -18,4 +17,4 @@ $ make -e CXX=[appropriate_gcc_complier]
 ```
 
 ## Document
-[OpenMP Tutorial Document]()
+[OpenMP Tutorial Document](https://github.com/GrandMango/openmp_tutorial/blob/master/doc/openmp_tutorial.pdf)
