@@ -15,13 +15,12 @@ using namespace std;
         std::cout << "# elapsed time ("<< #label <<"): "                       \
                   << delta##label.count()  << "s" << std::endl;
 
-
-int main(){
+int main() {
     TIMERSTART(alloc)
-    const uint64_t  num_entries = 1UL << 30;
-    vector<uint64_t> x(num_entries);
-    vector<uint64_t> y(num_entries);
-    vector<uint64_t> z(num_entries);
+    const uint64_t num_entries = 1UL << 30;
+    vector <uint64_t> x(num_entries);
+    vector <uint64_t> y(num_entries);
+    vector <uint64_t> z(num_entries);
     TIMERSTOP(alloc)
 
     TIMERSTART(init)
@@ -31,13 +30,13 @@ int main(){
     }
     TIMERSTOP(init)
 
-    TIMERSTART(seq)
+    TIMERSTART(seq) // 串行代码执行时间
     for (uint64_t i = 0; i < num_entries; ++i) {
         z[i] = x[i] + y[i];
     }
     TIMERSTOP(seq)
 
-    TIMERSTART(openmp)
+    TIMERSTART(openmp) // 并行代码执行时间
     #pragma omp parallel for
     for (uint64_t i = 0; i < num_entries; ++i) {
         z[i] = x[i] + y[i];
@@ -46,7 +45,7 @@ int main(){
 
     TIMERSTART(check)
     for (uint64_t i = 0; i < num_entries; ++i) {
-        if(z[i] - num_entries) {
+        if (z[i] - num_entries) {
             cout << "error at position: " << i << endl;
         }
     }

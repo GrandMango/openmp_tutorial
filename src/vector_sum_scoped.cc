@@ -16,13 +16,14 @@
 int main() {
     TIMERSTART(alloc)
     const uint64_t num_entries = 1UL << 30;
-    std::vector<uint64_t> x(num_entries);
-    std::vector<uint64_t> y(num_entries);
-    std::vector<uint64_t> z(num_entries);
+    std::vector <uint64_t> x(num_entries);
+    std::vector <uint64_t> y(num_entries);
+    std::vector <uint64_t> z(num_entries);
     TIMERSTOP(alloc)
 
     TIMERSTART(alltogether)
-    #pragma omp parallel 	    
+    // 此时只初始化一个线程组给三个 for 循环使用
+    #pragma omp parallel
     {
         #pragma omp for
         for (uint64_t i = 0; i < num_entries; i++) {
